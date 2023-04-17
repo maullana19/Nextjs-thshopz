@@ -1,6 +1,7 @@
 import Layouts from "@/components/layouts/Layout";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Product = ({ id, name, price, category, image }) => {
   return (
@@ -24,10 +25,12 @@ const Product = ({ id, name, price, category, image }) => {
       <div className="flex flex-wrap -m-4 ">
         <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
           <a className="block relative h-48 rounded overflow-hidden">
-            <img
+            <Image
               alt="ecommerce"
               className="object-cover object-center w-full h-full block"
               src={image}
+              width={120}
+              height={100}
             />
           </a>
           <div className="mt-4">

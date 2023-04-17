@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
 
-const Navbars = ({ cart }) => {
+const Navbars = () => {
   const routelinks = useRouter();
   const [isSticky, setSticky] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -350,10 +350,12 @@ const Navbars = ({ cart }) => {
                         className="flex items-center justify-between px-4 py-3 border-b border-gray-200"
                       >
                         <div className="flex items-center space-x-2">
-                          <img
+                          <Image
                             src={item.image}
                             alt={item.name}
                             className="w-10 h-10 object-cover rounded"
+                            width={100}
+                            height={100}
                           />
                           <div>
                             <h3 className="text-sm font-medium text-gray-900">
@@ -387,10 +389,12 @@ const Navbars = ({ cart }) => {
               data-dropdown-toggle="dropdown"
             >
               <span className="sr-only">Open user menu</span>
-              <img
+              <Image
                 className="w-8 h-8 rounded-full"
                 src="/img/user-picture.jpg"
-                alt="user photo"
+                alt="user-photo"
+                width={100}
+                height={100}
               />
             </button>
             {/* Dropdown menu */}
