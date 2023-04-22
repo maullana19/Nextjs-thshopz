@@ -2,14 +2,33 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import data from "@/pages/api/products/data.json";
 
 const Navbars = () => {
   const routelinks = useRouter();
   const [isSticky, setSticky] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
-  const [showCart, setShowCart] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  // SEARCH BAR
+  const handleSearch = (e) => {
+    const searchTerm = e.target.value;
+    setSearchTerm(searchTerm);
+
+    // Filter produk berdasarkan nama yang sesuai dengan search term
+    const filteredProducts = data.filter((producttz) =>
+      producttz.product.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(filteredProducts);
+  };
+
+  // CART Handle
+  const cart = useSelector((state) => state.cart);
+  const getItemsCount = () => {
+    return cart.reduce((accumulator, item) => accumulator + item.quantity, 0);
+  };
 
   // stickyHandle
   const handleScroll = () => {
@@ -32,30 +51,6 @@ const Navbars = () => {
   const handleDrawerClose = () => {
     setIsDrawerOpen(false);
   };
-
-  // Cart Handle
-  const toggleCart = () => {
-    setIsOpen(!isOpen);
-  };
-  const closeCart = () => {
-    setIsOpen(false);
-  };
-
-  const addToCart = (item) => {
-    const updatedCart = [...cartItems, item];
-    setCartItems(updatedCart);
-  };
-
-  const removeFromCart = (index) => {
-    const updatedCart = [...cartItems];
-    updatedCart.splice(index, 1);
-    setCartItems(updatedCart);
-  };
-
-  const cartItemsCount = cartItems.reduce(
-    (accumulator, currentItem) => accumulator + currentItem.quantity,
-    0
-  );
 
   return (
     <>
@@ -223,9 +218,25 @@ const Navbars = () => {
                   type="text"
                   name="email"
                   id="topbar-search"
+                  value={searchTerm}
+                  onChange={handleSearch}
                   className="bg-gray-50 border-none text-gray-900 sm:text-sm rounded-lg shadow block w-full pl-10 p-2.5"
                   placeholder="Search"
                 />
+                {searchResults.length > 0 && (
+                  <div className="z-30 absolute bg-white w-full rounded-lg">
+                    {searchResults.map((productx) => (
+                      <div
+                        key={productx.id}
+                        className="py-1 px-4 border-gray-300"
+                      >
+                        <Link href={`/product/${productx.id}`}>
+                          {productx.product}
+                        </Link>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </form>
           </div>
@@ -295,10 +306,13 @@ const Navbars = () => {
               </svg>
             </button>
             {/* CartShop */}
-            <button
-              type="button"
-              onClick={toggleCart}
-              className="p-2 mr-1 flex rounded-lg text-white"
+            <Link
+              href={"/cart"}
+              className={`${
+                routelinks.pathname === "/cart"
+                  ? "p-2 mr-1 flex rounded-lg text-white bg-red-500"
+                  : "p-2 mr-1 flex rounded-lg text-white"
+              }`}
             >
               <span className="sr-only">View cart</span>
               {/* cart icon */}
@@ -310,74 +324,8 @@ const Navbars = () => {
               >
                 <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
               </svg>
-              <span className="text-xs text-gray-200 ">{cartItemsCount}</span>
-            </button>
-            {/* Dropdown menu */}
-            {isOpen && (
-              <div className="absolute top-0 right-0 w-80 h-screen bg-white shadow-lg z-10">
-                <div className="px-4 py-3 border-b border-gray-200 flex justify-between items-center">
-                  <h2 className="text-lg font-medium text-gray-900">Cart</h2>
-                  <button onClick={closeCart}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <ul>
-                  {cartItems.length === 0 ? (
-                    <div className="flex items-center justify-center min-h-screen bg-gray-200">
-                      <h1>Your Cart Is Emmpty</h1>
-                      <Image
-                        src={"/img/icons8-cart-64.png"}
-                        height={50}
-                        width={50}
-                        alt="icons8cart"
-                      />
-                    </div>
-                  ) : (
-                    cartItems.map((item, index) => (
-                      <li
-                        key={item.id}
-                        className="flex items-center justify-between px-4 py-3 border-b border-gray-200"
-                      >
-                        <div className="flex items-center space-x-2">
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            className="w-10 h-10 object-cover rounded"
-                            width={100}
-                            height={100}
-                          />
-                          <div>
-                            <h3 className="text-sm font-medium text-gray-900">
-                              {item.name}
-                            </h3>
-                            <span className="text-sm font-medium text-gray-500">
-                              {item.quantity} x ${item.price.toFixed(2)}
-                            </span>
-                          </div>
-                        </div>
-                        <button
-                          className="text-red-500 hover:text-red-600 focus:outline-none focus:text-red-600"
-                          onClick={() => removeFromCart(index)}
-                        >
-                          Remove
-                        </button>
-                      </li>
-                    ))
-                  )}
-                </ul>
-              </div>
-            )}
+              <span className="text-xs text-gray-200 ">{getItemsCount()}</span>
+            </Link>
 
             {/* Dropdown User */}
 

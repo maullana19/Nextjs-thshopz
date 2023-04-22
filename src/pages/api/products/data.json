@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "product": "Dress/FM/Ramadhan",
+    "category": "fashion",
+    "image": "/img/product/fashion/perempuan/productmuslim-wanita.jpg",
+    "price": 120000.00,
+    "descriptions": "Ini adalaha pakaian wanita muslim"
+  },
+  {
+    "id": 2,
+    "product": "Dress/FM/2/Ramadhan",
+    "category": "fashion",
+    "image": "/img/product/fashion/perempuan/productmuslim-wanita2.jpg",
+    "price": 210000.00,
+    "descriptions": "Ini adalaha pakaian wanita muslim"
+  },
+  {
+    "id": 3,
+    "product": "Dress Wanita Ramadhan",
+    "category": "fashion",
+    "image": "/img/product/fashion/perempuan/productmuslim-wanita3.jpg",
+    "price": 210000.00,
+    "descriptions": "Ini adalaha pakaian wanita muslim"
+  }
+]
