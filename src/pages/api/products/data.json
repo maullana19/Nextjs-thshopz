@@ -1,26 +1,56 @@
 [
   {
     "id": 1,
-    "product": "Dress/FM/Ramadhan",
+    "names": "Dress/FM/Ramadhan",
     "category": "fashion",
     "image": "/img/product/fashion/perempuan/productmuslim-wanita.jpg",
     "price": 120000.00,
-    "descriptions": "Ini adalaha pakaian wanita muslim"
+    "descriptions": "Ini adalaha pakaian wanita muslim",
+    "rating": 6
   },
   {
     "id": 2,
-    "product": "Dress/FM/2/Ramadhan",
+    "names": "Dress/FM/2/Ramadhan",
     "category": "fashion",
     "image": "/img/product/fashion/perempuan/productmuslim-wanita2.jpg",
     "price": 210000.00,
-    "descriptions": "Ini adalaha pakaian wanita muslim"
+    "descriptions": "Ini adalaha pakaian wanita muslim",
+    "rating": 5
   },
   {
     "id": 3,
-    "product": "Dress Wanita Ramadhan",
+    "names": "Dress Wanita Ramadhan",
     "category": "fashion",
     "image": "/img/product/fashion/perempuan/productmuslim-wanita3.jpg",
     "price": 210000.00,
-    "descriptions": "Ini adalaha pakaian wanita muslim"
+    "descriptions": "Ini adalaha pakaian wanita muslim",
+    "rating": 5
+  },
+  {
+    "id": 4,
+    "names": "Casual Womans | Office",
+    "category": "fashion",
+    "image": "/img/product/fashion/perempuan/casual-wanita-1.jpg",
+    "price": 125000.00,
+    "descriptions": "Ini adalaha pakaian wanita muslim",
+    "rating": 1
+  },
+  {
+    "id": 5,
+    "names": "Formal Dress W",
+    "category": "fashion",
+    "image": "/img/product/fashion/perempuan/casual-wanita-2.jpg",
+    "price": 215000.00,
+    "descriptions": "Ini adalaha pakaian wanita muslim",
+    "rating": 9
+  },
+  {
+    "id": 6,
+    "names": "Casual Trendy Black Ed",
+    "category": "fashion",
+    "image": "/img/product/fashion/perempuan/casual-wanita-3.jpg",
+    "price": 213000.00,
+    "descriptions": "Ini adalaha pakaian wanita muslim",
+    "rating": 5
   }
 ]

@@ -1,5 +1,4 @@
 import ProductCard from "@/components/main/product/product_card";
-
 import { getProducts } from "./api/products";
 import Layouts from "@/components/layouts/Layout";
 
@@ -29,5 +28,10 @@ export default ShopPage;
 
 export async function getServerSideProps() {
   const products = await getProducts();
-  return { props: { products } };
+
+  return {
+    props: {
+      products,
+    },
+  };
 }

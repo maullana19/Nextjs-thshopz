@@ -9,7 +9,7 @@ export default function DetailProduct() {
   const dataDetailProduct = data.find((p) => p.id === Number(productId));
 
   if (dataDetailProduct) {
-    const { product, price, image, category, descriptions } = dataDetailProduct;
+    const { names, price, image, category, descriptions } = dataDetailProduct;
     return (
       <Layouts>
         <section className=" overflow-hidden">
@@ -27,7 +27,7 @@ export default function DetailProduct() {
                   {category}
                 </h2>
                 <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
-                  {product}
+                  {names}
                 </h1>
 
                 <p className="leading-relaxed">{descriptions}</p>

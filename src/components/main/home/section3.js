@@ -1,12 +1,12 @@
 const Section3Home = () => {
   return (
-    <section className="bg-[#3A98B9]">
+    <section className="bg-[#e0e1dd]">
       <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
         <div className="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
-          <h1 className="font-semibold text-3xl text-white">
+          <h1 className="font-semibold text-3xl text-[#415a77]">
             Daftar Dengan Mudah Nikmati Belanja Mu
           </h1>
-          <p className="leading-relaxed mt-4 text-gray-300">
+          <p className="leading-relaxed mt-4 text-gray-700">
             Daftar sekarang dan dapatkan kesempatan untuk berbelanja dengan
             mudah dan nyaman. Tunggu apa lagi? Ayo belanja sekarang dan nikmati
             penawaran terbaik hanya untukmu.

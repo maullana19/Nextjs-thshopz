@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Footers = () => {
   return (
-    <footer className="p-4 bg-gray-100 md:p-8 lg:p-10 ">
+    <footer className="p-4 bg-[#ABC4AA] md:p-8 lg:p-10 ">
       <div className="mx-auto max-w-screen-xl text-center">
         <Link
           href="#"
@@ -15,13 +15,13 @@ const Footers = () => {
           it please use it and give me a COFFEE
         </p>
         <div className="px-2 py-2">
-          <p className="text-sm text-gray-500">What Im Use</p>
+          <p className="text-2xl text-gray-500">What Im Use</p>
         </div>
         <ul className="flex flex-wrap justify-evenly items-center mb-6  text-gray-900 ">
           <li>
             <Link
               href={"https://react.dev/"}
-              className="mr-4 hover:underline md:mr-6 "
+              className="mr-4 hover:underline md:mr-6 font-semibold"
             >
               React Js
             </Link>
@@ -29,7 +29,7 @@ const Footers = () => {
           <li>
             <Link
               href={"https://nextjs.org/"}
-              className="mr-4 hover:underline md:mr-6"
+              className="mr-4 hover:underline md:mr-6 font-semibold"
             >
               Next JS
             </Link>
@@ -37,7 +37,7 @@ const Footers = () => {
           <li>
             <Link
               href={"https://tailwindcss.com/"}
-              className="mr-4 hover:underline md:mr-6 "
+              className="mr-4 hover:underline md:mr-6 font-semibold"
             >
               TailwindCss
             </Link>
@@ -45,7 +45,7 @@ const Footers = () => {
           <li>
             <Link
               href={"https://flowbite.com/"}
-              className="mr-4 hover:underline md:mr-6"
+              className="mr-4 hover:underline md:mr-6 font-semibold"
             >
               Flowbite
             </Link>

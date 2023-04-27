@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import data from "@/pages/api/products/data.json";
+import databestseller from "@/pages/api/products/databestseller.json";
 
 const Navbars = () => {
   const routelinks = useRouter();
@@ -12,16 +13,24 @@ const Navbars = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  // SEARCH BAR
+  useEffect(() => {
+    setSearchResults(data, databestseller);
+  }, []);
+
+  // SEARCH CONTROL
   const handleSearch = (e) => {
     const searchTerm = e.target.value;
+
     setSearchTerm(searchTerm);
 
-    // Filter produk berdasarkan nama yang sesuai dengan search term
-    const filteredProducts = data.filter((producttz) =>
-      producttz.product.toLowerCase().includes(searchTerm.toLowerCase())
+    // Filter Product By Name
+    const filteredProductsData = data.filter((product) =>
+      product.names.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    setSearchResults(filteredProducts);
+    const filteredProductsDataBestSeller = databestseller.filter((product) =>
+      product.names.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(filteredProductsData, filteredProductsDataBestSeller);
   };
 
   // CART Handle
@@ -54,33 +63,30 @@ const Navbars = () => {
 
   return (
     <>
-      <nav className="bg-[#3A98B9]  ">
-        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-2">
+      <nav className="bg-gray-300">
+        <div className="flex flex-wrap justify-between items-center mx-auto p-3">
           <a href="#" className="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-5 h-5 text-white"
+              className="w-5 h-5 "
             >
               <path d="M9.375 3a1.875 1.875 0 000 3.75h1.875v4.5H3.375A1.875 1.875 0 011.5 9.375v-.75c0-1.036.84-1.875 1.875-1.875h3.193A3.375 3.375 0 0112 2.753a3.375 3.375 0 015.432 3.997h3.943c1.035 0 1.875.84 1.875 1.875v.75c0 1.036-.84 1.875-1.875 1.875H12.75v-4.5h1.875a1.875 1.875 0 10-1.875-1.875V6.75h-1.5V4.875C11.25 3.839 10.41 3 9.375 3zM11.25 12.75H3v6.75a2.25 2.25 0 002.25 2.25h6v-9zM12.75 12.75v9h6.75a2.25 2.25 0 002.25-2.25v-6.75h-9z" />
             </svg>
 
-            <span className="self-center ml-2   font-semibold px-1 py-1 text-white">
+            <span className="self-center ml-2 text-xs font-semibold px-1 py-1 ">
               PROMO RAMADHAN
             </span>
           </a>
           <div className="flex items-center">
             <a
               href="tel:5541251234"
-              className="mr-6 text-xs  text-sky-200 hover:underline"
+              className="mr-6 text-xs  text-sky-600 hover:underline"
             >
               (+62) 896-3750-xxxx
             </a>
-            <Link
-              href={"/login"}
-              className=" font-semibold text-white underline"
-            >
+            <Link href={"/login"} className=" font-semibold text-sm underline">
               Login
             </Link>
           </div>
@@ -90,8 +96,8 @@ const Navbars = () => {
       <nav
         className={` ${
           isSticky
-            ? "fixed top-0 left-0 right-0 w-full px-4 lg:px-5 py-2.5 shadow bg-[#3A98B9] z-20"
-            : " px-4 lg:px-5 py-2.5 shadow bg-[#3A98B9]"
+            ? "fixed top-0 left-0 right-0 w-full px-4 lg:px-5 py-2.5 shadow bg-white z-20"
+            : " px-4 lg:px-5 py-2.5 shadow bg-white"
         }`}
       >
         <div className="flex flex-wrap justify-between items-center">
@@ -105,7 +111,7 @@ const Navbars = () => {
               className="hidden p-2 mr-3 rounded cursor-pointer lg:inline  "
             >
               <svg
-                className="w-6 h-6 text-white"
+                className="w-6 h-6 "
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -164,12 +170,12 @@ const Navbars = () => {
             >
               <div className="p-6">
                 <h2 className="text-2xl font-bold mb-4">ThShopz</h2>
-                <div className="h-full px-3 py-4 overflow-y-auto bg-gray-100 dark:bg-gray-800">
+                <div className="h-full px-3 py-4 overflow-y-auto bg-gray-100 ">
                   <ul className="space-y-2 font-medium">
                     <li>
                       <a
                         href="#"
-                        className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                        className="flex items-center p-2 text-gray-900 rounded-lg "
                       >
                         <svg
                           aria-hidden="true"
@@ -190,7 +196,7 @@ const Navbars = () => {
             </div>
             {/* LOGO */}
             <a href="#" className="flex mr-4">
-              <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
+              <span className="self-center text-2xl font-semibold whitespace-nowrap bg-[#E74646] p-1 text-white">
                 ThShopz
               </span>
             </a>
@@ -220,22 +226,24 @@ const Navbars = () => {
                   id="topbar-search"
                   value={searchTerm}
                   onChange={handleSearch}
-                  className="bg-gray-50 border-none text-gray-900 sm:text-sm rounded-lg shadow block w-full pl-10 p-2.5"
+                  className="bg-gray-300 border-none text-gray-900 sm:text-sm rounded-sm shadow block w-full pl-10 p-2.5"
                   placeholder="Search"
                 />
-                {searchResults.length > 0 && (
-                  <div className="z-30 absolute bg-white w-full rounded-lg">
+                {searchTerm && searchResults.length > 0 ? (
+                  <div className="z-30 absolute bg-white w-full rounded-sm shadow-lg">
                     {searchResults.map((productx) => (
                       <div
                         key={productx.id}
-                        className="py-1 px-4 border-gray-300"
+                        className="py-1 px-4 border-gray-300 hover:bg-gray-300"
                       >
-                        <Link href={`/product/${productx.id}`}>
-                          {productx.product}
+                        <Link href={`/product/detailedproduct/${productx.id}`}>
+                          <p className="font-semibold">{productx.names}</p>
                         </Link>
                       </div>
                     ))}
                   </div>
+                ) : (
+                  ""
                 )}
               </div>
             </form>
@@ -249,8 +257,8 @@ const Navbars = () => {
                     href="/"
                     className={`${
                       routelinks.pathname === "/"
-                        ? "inline-flex items-center text-sm font-bold text-white"
-                        : "text-gray-300 inline-flex items-center "
+                        ? "inline-flex items-center font-bold "
+                        : "text-gray-600 inline-flex text-sm  items-center "
                     }`}
                   >
                     Home
@@ -261,8 +269,8 @@ const Navbars = () => {
                     href="/product"
                     className={`${
                       routelinks.pathname === "/product"
-                        ? "inline-flex items-center text-sm font-bold text-white"
-                        : "text-gray-300 inline-flex items-center"
+                        ? "inline-flex items-center  font-bold "
+                        : "text-gray-600 inline-flex text-sm items-center"
                     }`}
                   >
                     Product
@@ -273,8 +281,8 @@ const Navbars = () => {
                     href="/order"
                     className={`${
                       routelinks.pathname === "/order"
-                        ? "inline-flex items-center text-sm font-bold text-white"
-                        : "text-gray-300 inline-flex items-center "
+                        ? "inline-flex items-center  font-bold "
+                        : "text-gray-600 inline-flex text-sm items-center "
                     }`}
                   >
                     Order
@@ -310,8 +318,8 @@ const Navbars = () => {
               href={"/cart"}
               className={`${
                 routelinks.pathname === "/cart"
-                  ? "p-2 mr-1 flex rounded-lg text-white bg-red-500"
-                  : "p-2 mr-1 flex rounded-lg text-white"
+                  ? "p-2 mr-1 flex rounded-lg  bg-red-500 text-white"
+                  : "p-2 mr-1 flex rounded-lg "
               }`}
             >
               <span className="sr-only">View cart</span>
@@ -324,7 +332,7 @@ const Navbars = () => {
               >
                 <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
               </svg>
-              <span className="text-xs text-gray-200 ">{getItemsCount()}</span>
+              <span className="text-xs  ">{getItemsCount()}</span>
             </Link>
 
             {/* Dropdown User */}

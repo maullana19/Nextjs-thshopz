@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "names": "Kaos Polos Hitam PRIA",
+    "category": "fashion",
+    "image": "/img/product/fashion/pria/black-t-shirt.jpg",
+    "price": 98000.00,
+    "descriptions": "Kaos Polos Pria Hitam"
+  },
+  {
+    "id": 2,
+    "names": "Kaos Polos Putih PRIA",
+    "category": "fashion",
+    "image": "/img/product/fashion/pria/white-t-shirt.jpg",
+    "price": 98000.00,
+    "descriptions": "Ini adalaha pakaian pria kaos polos"
+  }
+]
