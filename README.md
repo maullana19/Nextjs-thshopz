@@ -16,4 +16,4 @@ pnpm dev
 
 [Review]
 
-![ProductPages](/productview.png)
+![ProductPages](productview.png)
